@@ -26,8 +26,13 @@ class Ett:
                 for x in ids:
                         part = book.get_item_with_id(x)
                         part_text = bs(part.get_content(),"lxml").get_text()
-                        with open("c:\\audiobook\\"+self.title + sep +str(i)+".txt","w") as file:
-                                file.write(part_text)
+                        try:
+                            with open("c:\\audiobook\\"+self.title + sep +str(i)+".txt","w") as file:
+                                    print(part_text)
+                                    file.write(part_text)
+                        except UnicodeEncodeError as e:
+                            pass
+
                         i+=1
                 return True
 
@@ -39,4 +44,3 @@ book = Ett('text.epub')
 # Ex:
 book.get_pages()
 #Now a folder will be created with name skyward,and each chapter of skyward will be inside it as text files
-
